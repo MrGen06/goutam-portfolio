@@ -1,0 +1,175 @@
+/* ============================================================
+   src/index.css  —  Global Design System
+   ============================================================
+   Single stylesheet. All design tokens, base resets, and
+   global styles. Component-level styling is Tailwind utilities.
+   ============================================================ */
+
+@import "tailwindcss";
+
+/* ── Design Tokens ─────────────────────────────────────────── */
+@theme {
+  /* Accent — Indigo-Violet (restrained, sophisticated) */
+  --color-brand-50:  #eef2ff;
+  --color-brand-100: #e0e7ff;
+  --color-brand-200: #c7d2fe;
+  --color-brand-300: #a5b4fc;
+  --color-brand-400: #818cf8;   /* primary accent */
+  --color-brand-500: #6366f1;
+  --color-brand-600: #4f46e5;
+  --color-brand-700: #4338ca;
+  --color-brand-800: #3730a3;
+  --color-brand-900: #312e81;
+  --color-brand-950: #1e1b4b;
+
+  /* Surface — dark blue-black scale */
+  --color-surface-50:  #f8fafc;
+  --color-surface-100: #f1f5f9;
+  --color-surface-600: #1f2333;   /* elevated card */
+  --color-surface-700: #191c28;   /* card */
+  --color-surface-800: #141720;   /* subtle lift */
+  --color-surface-900: #0e1018;   /* primary page bg */
+  --color-surface-950: #07080e;   /* deepest bg */
+
+  /* Typography */
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  /* Easing */
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Keyframe hooks */
+  --animate-fade-in:  fade-in  0.4s ease-out both;
+  --animate-slide-up: slide-up 0.5s ease-out both;
+}
+
+/* ── Keyframes ─────────────────────────────────────────────── */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes hero-pulse {
+  0%, 100% { opacity: 0.12; transform: scale(1); }
+  50%       { opacity: 0.24; transform: scale(1.14); }
+}
+
+@keyframes hero-float {
+  0%, 100% { transform: translateY(0);   }
+  50%       { transform: translateY(-6px); }
+}
+
+@keyframes scroll-hint {
+  0%, 100% { opacity: 0.4; transform: translateY(0); }
+  50%       { opacity: 0.7; transform: translateY(4px); }
+}
+
+/* ── Base ──────────────────────────────────────────────────── */
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 16px;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+    font-family: var(--font-sans);
+    background-color: var(--color-surface-950);
+    color: #cbd5e1; /* slate-300 — comfortable reading gray */
+    line-height: 1.7;
+    min-height: 100dvh;
+
+    /*
+     * Subtle top radial glow — very faint brand tint at the top edge.
+     * Gives visual depth without distracting from content.
+     */
+    background-image:
+      radial-gradient(
+        ellipse 120% 45% at 50% -8%,
+        rgba(99, 102, 241, 0.055) 0%,
+        transparent 75%
+      );
+    background-attachment: fixed;
+  }
+
+  /* ── Headings ── */
+  h1, h2, h3, h4, h5, h6 {
+    color: #f1f5f9; /* slate-100 */
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+  }
+
+  p { margin: 0; }
+
+  a { color: inherit; text-decoration: none; }
+
+  code, kbd, samp, pre {
+    font-family: var(--font-mono);
+    font-size: 0.875em;
+  }
+
+  img, video, svg { display: block; max-width: 100%; }
+
+  button { cursor: pointer; }
+
+  /* ── Focus ── */
+  :focus-visible {
+    outline: 2px solid #818cf8;
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* ── Scrollbar ── */
+  ::-webkit-scrollbar          { width: 5px; }
+  ::-webkit-scrollbar-track    { background: var(--color-surface-950); }
+  ::-webkit-scrollbar-thumb    { background: #252838; border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: #6366f1; }
+
+  /* ── Selection ── */
+  ::selection {
+    background-color: rgba(99, 102, 241, 0.28);
+    color: #f1f5f9;
+  }
+
+  /* ── Reduced motion ── */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration:       0.01ms !important;
+      animation-iteration-count: 1     !important;
+      transition-duration:      0.01ms !important;
+    }
+    html { scroll-behavior: auto; }
+  }
+}
+
+/* ── Hero animation utilities ─────────────────────────────── */
+
+/* Pulsing glow ring on SVG nodes */
+.hero-pulse {
+  animation: hero-pulse 3.5s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+/* Subtle float for the visual container */
+.hero-float {
+  animation: hero-float 6s ease-in-out infinite;
+}
+
+/* Scroll indicator chevron */
+.scroll-hint {
+  animation: scroll-hint 2s ease-in-out infinite;
+}
