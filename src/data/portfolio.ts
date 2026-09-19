@@ -75,8 +75,7 @@ export const personalInfo: PersonalInfo = {
   ],
   location: 'NIT Kurukshetra, Haryana, India',
   contact: {
-    // TODO: fill before publishing
-    email: '',
+    email: 'goutam.ind.2005gmail.com',
     location: 'NIT Kurukshetra, Haryana, India',
     // TODO: add resume PDF URL
     resumeUrl: '',

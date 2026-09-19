@@ -13,6 +13,7 @@ import Education from '@/sections/Education';
 import Positions from '@/sections/Positions';
 import Achievements from '@/sections/Achievements';
 import Contact from '@/sections/Contact';
+import { BackToTop } from '@/components/BackToTop';
 
 export default function App() {
   const [, toggleTheme] = useTheme();
@@ -41,6 +42,7 @@ export default function App() {
       </main>
 
       <Footer />
+      <BackToTop />
     </div>
   );
 }

@@ -13,3 +13,4 @@ export { Badge }          from './Badge';
 export { Card }           from './Card';
 export { Divider }        from './Divider';
 export { GithubIcon }     from './GithubIcon';
+export { LinkedinIcon }   from './LinkedinIcon';
